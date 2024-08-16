@@ -1,609 +1,812 @@
-<!-- Created by <prince3pro> -->
-<html lang="en">
+<!-- Created by Amardeep kesharwani -->
+
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="descriptian" content="aaaa">
-    <meta name="keyword" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Survey Form</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="author" content="amardeep kesharwani"/>
+<title>Invoicing | React App</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+ 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+ 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+ <style>
+ /*************************
+     amardeep kesharwani
+ ***************************/
+ *{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ }
+ body {
+ font-family:sans-serif;
+ font-weight:400;
+ line-height:1.2;
+ font-size:16px;
+ color:#3d3d3d;
+ }
+ a,a:hover {
+ text-decoration:none;
+ }
+ .container {
+ width:100%;
+ padding:0 5%;
+ }
+ .row{
+ display:flex;
+ flex-wrap:wrap;
+ width:100%;
+ }
+ 
+ .center{
+ text-align:center;
+ }
+ .title {
+ margin:40px 0 40px;
+ }
+ .title h1{
+ color:#fa3c3c;
+ margin-bottom:5px;
+ }
+ .title p{
+ font-weight:bold;
+ margin:5px 0;
+ }
+ .w100{
+ width:100%;
+ }
+ .w50{
+ width:50%;
+ }
+ .w25{
+ width:25%;
+ }
+ .w30{
+ width:30%;
+ }
+ 
+ .w20{
+ width:20%;
+ }
+ .w8{
+ width:8%;
+ }
+ .w6{
+ width:6%;
+ }
+ .row > div{
+ border:1px solid #333;
+ }
+ .nb div{
+ border:0px;
+ border-bottom:1px solid #333;
+ }
+ 
+ .bl{
+ border-right:1px solid #333! important;
+ }
+ .bbn{
+ border-bottom:0px!important;
+ }
+ .p5{
+ padding:5px;
+ }
+ .p8{
+ padding:8px;
+ }
+ .h100 div{
+ min-height:200px;
+ }
+ .m5{
+ margin-top:5px;
+ }
+ .sin {
+ font-family:cursive;
+ margin:3px 0;
+ transform:rotate(-5deg) translateY(12px);
+ }
+ .right{
+ text-align:right;
+ }
+ .f14{
+ font-size:14px!important;
+ } 
+ .dn{
+ display:none;
+ }
+ form{
+ width:100%;
+ }
+ .form-group{
+ margin-bottom:20px;
+ }
+ .form-group label {
+ display:block;
+ margin:10px 0;
+ font-size:15px;
+ color:#555;
+ text-transform:uppercase;
+ }
+ .form-group input ,
+ .form-group select,
+ .form-group textarea {
+ display:block;
+ width:100%;
+ outline:none;
+ border:none;
+ background:#fff;
+ padding:10px 20px;
+ box-shadow:0 0 3px rgba(0,0,0,0.2);
+ }
+ textarea {
+ resize:none;
+ height:70px;
+ font-family:sans-serif;
+ }
+ .error{
+  display: block;
+ color:#f00;
+ font-size:14px;
+ font-weight:bold;
+ letter-spacing:1px;
+ margin:5px 0 15px;
+ }
+ .btn{
+ display:inline-block;
+ padding: 10px 20px;
+ background:#000;
+ color:#fff;
+ outline:none;
+ border:none;
+ border-radius:4px;
+ margin-right:20px;
+ font-size:16px;
+ letter-spacing:1px;
+ }
+ .print{
+  display:inline-block;
+  position:absolute;
+  top:0;
+  right:0;
+  outline:none;
+  border:none;
+  padding:8px 16px;
+  background:#fa3c3c;
+  color:#fff;
+  z-index:5;
+  cursor:pointer;
+ }
+ .top-title{
+ padding-bottom:30px;
+ margin-bottom:40px;
+ border-bottom:1px solid #999;
+ }
+ .mw-1000{
+ max-width:1000px;
+ margin:auto;
+ margin-bottom:50px;
+ }
+ .my{
+ margin:30px 0 ;
+ margin-right:20px;
+ }
+ .info{
+ font-weight:bold;
+ font-size:12px;
+ display:block;
+ margin:8px 0;
+ text-transform:uppercase;
+ letter-spacing:1px;
+ }
+ .preloader {
+ position:fixed;
+ top:0;
+ left:0;
+ height:100vh;
+ width:100%;
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ background:rgba(254,255,255,0.6);
+ z-index:9;
+ }
+ .preloader svg{
+ position:relative;
+ height:70px;
+ width:70px;
+ animation: rotate 2s linear infinite;
+ }
+ .preloader svg circle{
+ width:100%;
+ height:100%;
+ fill:none;
+ stroke-width:5px;
+ stroke:#fa3c3c;
+ stroke-linecap: round;
+ transform:translate(5px, 5px);
+ stroke-dasharray:200;
+ stroke-dashoffset:200;
+ animation:rotated 4s linear infinite;
+ }
+ @keyframes rotate{
+ 0%{
+ transform:rotate(0deg);
+ }
+ 100%{
+ transform:rotate(360deg);
+ }
+ }
+ @keyframes rotated{
+ 0%,100%{
+ stroke-dashoffset:200;
+ }
+ 50%{
+ stroke-dashoffset:0;
+ }
+ 50.1%{
+ stroke-dashoffset:400;
+ }
+ }
+ @media print and (max-width:2000px){
+  .print,
+  .title,
+  .info,
+  .btn{
+   display:none;
+  }
+ }
+ @media screen and (max-width:520px){
+  .row{
+   font-size:8px;
+  }
+ }
+ @media screen and (max-width:720px){
+  .row{
+   font-size:12px;
+  }
+ }
+ </style>   
 </head>
 <body>
+<div id="root"></div>
 
-<div class="container">
-  <header class="header">
-    <h1 id="title" class="text-center">Survey Form</h1>
-    <marquee behaviour="scroll" direction="right">
- <code>----Form by Prince----</code> </marquee>
-    <p id="description" class="description text-center">
-      Thank you for taking the time to help us...
-    </p>
-  </header>
-  <form id="survey-form">
-    <div class="form-group">
-      <label id="name-label" for="name">Name</label>
-      <input type="text" inputmode="text" name="name" id="name" class="form-control" placeholder="Enter your name" required />
+<!-- scripts -->
+<script type="text/babel">
+ const root = document.getElementById("root");
+ const {Component} = React;
+ const { log } = console;
+ //-----------------------//
+ //    React Component    //
+ //-----------------------//
+ function Preloader(props){
+  return(
+   <div className="preloader">
+    <svg>
+    <circle cx="30" cy="30" r="30">
+    </circle>
+    </svg>
+   </div>
+  )
+ }
+ <br/>
+ class InputForm extends Component{
+  render(){
+   const { data } = this.props;
+   const { handleChange } = this.props;
+   return(
+    <section className="container mw-1000 ">
+    <div className="title center top-title">
+    <h1>INVOICING</h1>
+    <p>sales invoice Or bill generator web application</p>
     </div>
-    <div class="form-group">
-        <label id="number-label"for="number">Phone Number</label>
-        <input type="number" name="number"id="number" class="form-control"placeholder="Enter your Phone Number" required />
+    <form onSubmit={this.props.handleSubmit}>
+    <div className="form-group" >
+    <label>Buyer's Name*</label>
+    <input 
+    type="text" 
+    name="buyer" 
+    value={data.buyer}
+    onChange={handleChange}
+    />
     </div>
-    <div class="form-group">
-      <label id="email-label" for="email">Email</label>
-      <input type="email" name="email" id="email" class="form-control" placeholder="Enter your Email" required />
+    <div className="form-group">
+    <label>Buyer address</label>
+    <textarea 
+    name="address" 
+    value={data.address}
+    onChange={handleChange}
+    >
+    </textarea>
     </div>
-    <div class="form-group">
-      <label id="number-label" for="number" inputmode="none">Age<span class="clue">(optional)</span></label>
-      <input type="number" name="age" id="number" min="10" max="99" class="form-control" placeholder="Age" />
+    <div className="form-group">
+    <label>Select State*</label>
+    <select 
+    value={data.state}
+    name="state"
+    onChange={handleChange}>
+    <option value="">select state</option>
+    <option value="local" >Local State</option>
+    <option value="inter" >Inter State</option> 
+    </select> 
     </div>
-    <div class="form-group">
-            <label for="street-address">Street address</label>
-            <input type="text" name="street address"id="text" class="form-control"placeholder="Address" />
+    <div className="form-group" >
+    <label>Product*</label>
+    <input 
+    type="text" 
+    name="product" 
+    value={data.product}
+    onChange={handleChange}
+    />
     </div>
-     <div class="form-group">
-     <label id="number-label" for="number">Pincode</label>
-        <input type="number" name="pin" pattern="[0-9]{6}" min="5" max="6" class="form-control" placeholder="Pincode" />
+    <div className="form-group" >
+    <label>HSN/SAC Code</label>
+    <input 
+    type="text" 
+    name="hsn" 
+    value={data.hsn}
+    onChange={handleChange}
+    />
     </div>
-       <div class="form-group">
-      <p>
-        <h5>From Which Country Are You Belongs ? </h5>
-      </p><select id="dropdown" name="role" class="form-control" required>
-        <option disabled selected value>Select Country</option>
-
-    <option value="AF">Afghanistan</option>
-    <option value="AX">Aland Islands</option>
-    <option value="AL">Albania</option>
-    <option value="DZ">Algeria</option>
-    <option value="AS">American Samoa</option>
-    <option value="AD">Andorra</option>
-    <option value="AO">Angola</option>
-    <option value="AI">Anguilla</option>
-    <option value="AQ">Antarctica</option>
-    <option value="AG">Antigua and Barbuda</option>
-    <option value="AR">Argentina</option>
-    <option value="AM">Armenia</option>
-    <option value="AW">Aruba</option>
-    <option value="AU">Australia</option>
-    <option value="AT">Austria</option>
-    <option value="AZ">Azerbaijan</option>
-    <option value="BS">Bahamas</option>
-    <option value="BH">Bahrain</option>
-    <option value="BD">Bangladesh</option>
-    <option value="BB">Barbados</option>
-    <option value="BY">Belarus</option>
-    <option value="BE">Belgium</option>
-    <option value="BZ">Belize</option>
-    <option value="BJ">Benin</option>
-    <option value="BM">Bermuda</option>
-    <option value="BT">Bhutan</option>
-    <option value="BO">Bolivia</option>
-    <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
-    <option value="BA">Bosnia and Herzegovina</option>
-    <option value="BW">Botswana</option>
-    <option value="BV">Bouvet Island</option>
-    <option value="BR">Brazil</option>
-    <option value="IO">British Indian Ocean Territory</option>
-    <option value="BN">Brunei Darussalam</option>
-    <option value="BG">Bulgaria</option>
-    <option value="BF">Burkina Faso</option>
-    <option value="BI">Burundi</option>
-    <option value="KH">Cambodia</option>
-    <option value="CM">Cameroon</option>
-    <option value="CA">Canada</option>
-    <option value="CV">Cape Verde</option>
-    <option value="KY">Cayman Islands</option>
-    <option value="CF">Central African Republic</option>
-    <option value="TD">Chad</option>
-    <option value="CL">Chile</option>
-    <option value="CN">China</option>
-    <option value="CX">Christmas Island</option>
-    <option value="CC">Cocos (Keeling) Islands</option>
-    <option value="CO">Colombia</option>
-    <option value="KM">Comoros</option>
-    <option value="CG">Congo</option>
-    <option value="CD">Congo, Democratic Republic of the Congo</option>
-    <option value="CK">Cook Islands</option>
-    <option value="CR">Costa Rica</option>
-    <option value="CI">Cote D'Ivoire</option>
-    <option value="HR">Croatia</option>
-    <option value="CU">Cuba</option>
-    <option value="CW">Curacao</option>
-    <option value="CY">Cyprus</option>
-    <option value="CZ">Czech Republic</option>
-    <option value="DK">Denmark</option>
-    <option value="DJ">Djibouti</option>
-    <option value="DM">Dominica</option>
-    <option value="DO">Dominican Republic</option>
-    <option value="EC">Ecuador</option>
-    <option value="EG">Egypt</option>
-    <option value="SV">El Salvador</option>
-    <option value="GQ">Equatorial Guinea</option>
-    <option value="ER">Eritrea</option>
-    <option value="EE">Estonia</option>
-    <option value="ET">Ethiopia</option>
-    <option value="FK">Falkland Islands (Malvinas)</option>
-    <option value="FO">Faroe Islands</option>
-    <option value="FJ">Fiji</option>
-    <option value="FI">Finland</option>
-    <option value="FR">France</option>
-    <option value="GF">French Guiana</option>
-    <option value="PF">French Polynesia</option>
-    <option value="TF">French Southern Territories</option>
-    <option value="GA">Gabon</option>
-    <option value="GM">Gambia</option>
-    <option value="GE">Georgia</option>
-    <option value="DE">Germany</option>
-    <option value="GH">Ghana</option>
-    <option value="GI">Gibraltar</option>
-    <option value="GR">Greece</option>
-    <option value="GL">Greenland</option>
-    <option value="GD">Grenada</option>
-    <option value="GP">Guadeloupe</option>
-    <option value="GU">Guam</option>
-    <option value="GT">Guatemala</option>
-    <option value="GG">Guernsey</option>
-    <option value="GN">Guinea</option>
-    <option value="GW">Guinea-Bissau</option>
-    <option value="GY">Guyana</option>
-    <option value="HT">Haiti</option>
-    <option value="HM">Heard Island and Mcdonald Islands</option>
-    <option value="VA">Holy See (Vatican City State)</option>
-    <option value="HN">Honduras</option>
-    <option value="HK">Hong Kong</option>
-    <option value="HU">Hungary</option>
-    <option value="IS">Iceland</option>
-    <option value="IN">India</option>
-    <option value="ID">Indonesia</option>
-    <option value="IR">Iran, Islamic Republic of</option>
-    <option value="IQ">Iraq</option>
-    <option value="IE">Ireland</option>
-    <option value="IM">Isle of Man</option>
-    <option value="IL">Israel</option>
-    <option value="IT">Italy</option>
-    <option value="JM">Jamaica</option>
-    <option value="JP">Japan</option>
-    <option value="JE">Jersey</option>
-    <option value="JO">Jordan</option>
-    <option value="KZ">Kazakhstan</option>
-    <option value="KE">Kenya</option>
-    <option value="KI">Kiribati</option>
-    <option value="KP">Korea, Democratic People's Republic of</option>
-    <option value="KR">Korea, Republic of</option>
-    <option value="XK">Kosovo</option>
-    <option value="KW">Kuwait</option>
-    <option value="KG">Kyrgyzstan</option>
-    <option value="LA">Lao People's Democratic Republic</option>
-    <option value="LV">Latvia</option>
-    <option value="LB">Lebanon</option>
-    <option value="LS">Lesotho</option>
-    <option value="LR">Liberia</option>
-    <option value="LY">Libyan Arab Jamahiriya</option>
-    <option value="LI">Liechtenstein</option>
-    <option value="LT">Lithuania</option>
-    <option value="LU">Luxembourg</option>
-    <option value="MO">Macao</option>
-    <option value="MK">Macedonia, the Former Yugoslav Republic of</option>
-    <option value="MG">Madagascar</option>
-    <option value="MW">Malawi</option>
-    <option value="MY">Malaysia</option>
-    <option value="MV">Maldives</option>
-    <option value="ML">Mali</option>
-    <option value="MT">Malta</option>
-    <option value="MH">Marshall Islands</option>
-    <option value="MQ">Martinique</option>
-    <option value="MR">Mauritania</option>
-    <option value="MU">Mauritius</option>
-    <option value="YT">Mayotte</option>
-    <option value="MX">Mexico</option>
-    <option value="FM">Micronesia, Federated States of</option>
-    <option value="MD">Moldova, Republic of</option>
-    <option value="MC">Monaco</option>
-    <option value="MN">Mongolia</option>
-    <option value="ME">Montenegro</option>
-    <option value="MS">Montserrat</option>
-    <option value="MA">Morocco</option>
-    <option value="MZ">Mozambique</option>
-    <option value="MM">Myanmar</option>
-    <option value="NA">Namibia</option>
-    <option value="NR">Nauru</option>
-    <option value="NP">Nepal</option>
-    <option value="NL">Netherlands</option>
-    <option value="AN">Netherlands Antilles</option>
-    <option value="NC">New Caledonia</option>
-    <option value="NZ">New Zealand</option>
-    <option value="NI">Nicaragua</option>
-    <option value="NE">Niger</option>
-    <option value="NG">Nigeria</option>
-    <option value="NU">Niue</option>
-    <option value="NF">Norfolk Island</option>
-    <option value="MP">Northern Mariana Islands</option>
-    <option value="NO">Norway</option>
-    <option value="OM">Oman</option>
-    <option value="PK">Pakistan</option>
-    <option value="PW">Palau</option>
-    <option value="PS">Palestinian Territory, Occupied</option>
-    <option value="PA">Panama</option>
-    <option value="PG">Papua New Guinea</option>
-    <option value="PY">Paraguay</option>
-    <option value="PE">Peru</option>
-    <option value="PH">Philippines</option>
-    <option value="PN">Pitcairn</option>
-    <option value="PL">Poland</option>
-    <option value="PT">Portugal</option>
-    <option value="PR">Puerto Rico</option>
-    <option value="QA">Qatar</option>
-    <option value="RE">Reunion</option>
-    <option value="RO">Romania</option>
-    <option value="RU">Russian Federation</option>
-    <option value="RW">Rwanda</option>
-    <option value="BL">Saint Barthelemy</option>
-    <option value="SH">Saint Helena</option>
-    <option value="KN">Saint Kitts and Nevis</option>
-    <option value="LC">Saint Lucia</option>
-    <option value="MF">Saint Martin</option>
-    <option value="PM">Saint Pierre and Miquelon</option>
-    <option value="VC">Saint Vincent and the Grenadines</option>
-    <option value="WS">Samoa</option>
-    <option value="SM">San Marino</option>
-    <option value="ST">Sao Tome and Principe</option>
-    <option value="SA">Saudi Arabia</option>
-    <option value="SN">Senegal</option>
-    <option value="RS">Serbia</option>
-    <option value="CS">Serbia and Montenegro</option>
-    <option value="SC">Seychelles</option>
-    <option value="SL">Sierra Leone</option>
-    <option value="SG">Singapore</option>
-    <option value="SX">Sint Maarten</option>
-    <option value="SK">Slovakia</option>
-    <option value="SI">Slovenia</option>
-    <option value="SB">Solomon Islands</option>
-    <option value="SO">Somalia</option>
-    <option value="ZA">South Africa</option>
-    <option value="GS">South Georgia and the South Sandwich Islands</option>
-    <option value="SS">South Sudan</option>
-    <option value="ES">Spain</option>
-    <option value="LK">Sri Lanka</option>
-    <option value="SD">Sudan</option>
-    <option value="SR">Suriname</option>
-    <option value="SJ">Svalbard and Jan Mayen</option>
-    <option value="SZ">Swaziland</option>
-    <option value="SE">Sweden</option>
-    <option value="CH">Switzerland</option>
-    <option value="SY">Syrian Arab Republic</option>
-    <option value="TW">Taiwan, Province of China</option>
-    <option value="TJ">Tajikistan</option>
-    <option value="TZ">Tanzania, United Republic of</option>
-    <option value="TH">Thailand</option>
-    <option value="TL">Timor-Leste</option>
-    <option value="TG">Togo</option>
-    <option value="TK">Tokelau</option>
-    <option value="TO">Tonga</option>
-    <option value="TT">Trinidad and Tobago</option>
-    <option value="TN">Tunisia</option>
-    <option value="TR">Turkey</option>
-    <option value="TM">Turkmenistan</option>
-    <option value="TC">Turks and Caicos Islands</option>
-    <option value="TV">Tuvalu</option>
-    <option value="UG">Uganda</option>
-    <option value="UA">Ukraine</option>
-    <option value="AE">United Arab Emirates</option>
-    <option value="GB">United Kingdom</option>
-    <option value="US">United States</option>
-    <option value="UM">United States Minor Outlying Islands</option>
-    <option value="UY">Uruguay</option>
-    <option value="UZ">Uzbekistan</option>
-    <option value="VU">Vanuatu</option>
-    <option value="VE">Venezuela</option>
-    <option value="VN">Viet Nam</option>
-    <option value="VG">Virgin Islands, British</option>
-    <option value="VI">Virgin Islands, U.s.</option>
-    <option value="WF">Wallis and Futuna</option>
-    <option value="EH">Western Sahara</option>
-    <option value="YE">Yemen</option>
-    <option value="ZM">Zambia</option>
-    <option value="ZW">Zimbabwe</option>
-</select>
-</div>
-
-
-
-<form>
-  <div class="form-group">
-    <label for="#inputState">From Which State In India Are You Belongs ?</label>
-    <select class="form-control" id="inputState">
-                        <option value="SelectState">Select State</option>
-                        <option value="Andra Pradesh">Andra Pradesh</option>
-                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                        <option value="Assam">Assam</option>
-                        <option value="Bihar">Bihar</option>
-                        <option value="Chhattisgarh">Chhattisgarh</option>
-                        <option value="Goa">Goa</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                        <option value="Jharkhand">Jharkhand</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Kerala">Kerala</option>
-                        <option value="Madya Pradesh">Madya Pradesh</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Manipur">Manipur</option>
-                        <option value="Meghalaya">Meghalaya</option>
-                        <option value="Mizoram">Mizoram</option>
-                        <option value="Nagaland">Nagaland</option>
-                        <option value="Orissa">Orissa</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Rajasthan">Rajasthan</option>
-                        <option value="Sikkim">Sikkim</option>
-                        <option value="Tamil Nadu">Tamil Nadu</option>
-                        <option value="Telangana">Telangana</option>
-                        <option value="Tripura">Tripura</option>
-                        <option value="Uttaranchal">Uttaranchal</option>
-                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                        <option value="West Bengal">West Bengal</option>
-                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                        <option value="Chandigarh">Chandigarh</option>
-                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                        <option value="Daman and Diu">Daman and Diu</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Lakshadeep">Lakshadeep</option>
-                        <option value="Pondicherry">Pondicherry</option>
-                      </select>
-  </div>
-
-    <div class="form-group">
-      <p>Which option best describes your current role?</p>
-      <select id="dropdown" name="role" class="form-control" required>
-        <option disabled selected value>Select current role</option>
-        <option value="student">Student</option>
-        <option value="job">Teacher</option>
-        <option value="learner">Businessman</option>
-        <option value="preferNo">Prefer not to say</option>
-        <option value="other">Other</option>
-      </select>
+    <div className="form-group" >
+    <label>Product Rate*</label>
+    <input 
+    type="Number" 
+    name="productRate" 
+    value={data.productRate}
+    onChange={handleChange}
+    />
     </div>
-
-    <div class="form-group">
-      <p>Would you recommend this survey to a friend?</p>
-      <label>
-        <input name="user-recommend" value="definitely" type="radio" class="input-radio" checked />Definitely</label>
-      <label>
-        <input name="user-recommend" value="maybe" type="radio" class="input-radio" />Maybe</label>
-
-      <label><input name="user-recommend" value="not-sure" type="radio" class="input-radio" />Not sure</label>
+    <div className="form-group" >
+    <label>Quality*</label>
+    <input 
+    type="number" 
+    name="quality" 
+    value={data.quality}
+    onChange={handleChange}
+    />
     </div>
-
-    <div class="form-group">
-      <p>
-        which things is more attractive in you?
-      </p>
-      <select id="most-like" name="mostLike" class="form-control" required>
-        <option disabled selected value>Select an option</option>
-        <option value="challenges">Smartness</option>
-        <option value="projects">Beauty</option>
-        <option value="community">Caring</option>
-        <option value="openSource">Independence</option>
-      </select>
+    <div className="form-group" >
+    <label>payment type</label>
+    <select 
+    name="payType" 
+    value={data.payType}
+    onChange={handleChange}>
+    <option value="Cash" >Cash</option>
+    <option value="Bank" >Bank</option> 
+    <option value="Credit" >Credit</option>
+    </select>
     </div>
-
-    <div class="form-group">
-      <p>
-        What would you like to see improved?
-        <span class="clue">(Check all that apply)</span>
-      </p>
-
-      <label><input name="prefer" value="front-end-projects" type="checkbox" class="input-checkbox" />Hindi</label>
-      <label>
-        <input name="prefer" value="back-end-projects" type="checkbox" class="input-checkbox" />English</label>
-      <label><input name="prefer" value="data-visualization" type="checkbox" class="input-checkbox" />Bhojpuri</label>
-      <label><input name="prefer" value="challenges" type="checkbox" class="input-checkbox" />Khortha</label>
-      <label><input name="prefer" value="open-source-community" type="checkbox" class="input-checkbox" />Odiya</label>
-      <label><input name="prefer" value="gitter-help-rooms" type="checkbox" class="input-checkbox" />Urdu</label>
-      <label><input name="prefer" value="videos" type="checkbox" class="input-checkbox" />Bengali</label>
-      <label><input name="prefer" value="city-meetups" type="checkbox" class="input-checkbox" />Gujrati</label>
-      <label><input name="prefer" value="wiki" type="checkbox" class="input-checkbox" />Telugu</label>
-      <label><input name="prefer" value="forum" type="checkbox" class="input-checkbox" />Tamil</label>
-      <label><input name="prefer" value="additional-courses" type="checkbox" class="input-checkbox" />Nepali</label>
+    <div className="form-group" >
+    <label>Tex Type</label>
+    <select
+     name="texType"
+     value={data.texType}
+     onChange={handleChange}>
+    <option value="" >Nill</option>
+    <option value="1" >GST</option> 
+    <option value="2" disabled>vat</option>
+    </select>
     </div>
+    <div className="form-group" >
+    <label>15 Character, GST No </label>
+    <input 
+    type="text" 
+    name="gstno" 
+    value={data.gstno}
+    onChange={handleChange}
+    />
+    </div>
+    <div className="form-group" >
+    <label>GST Rate </label>
+    <select 
+     name="gstRate" 
+     value={data.gstRate}
+     onChange={handleChange}>
+    <option value="" >0%</option>
+    <option value="5">5%</option>
+    <option value="8">8%</option>
+    <option value="12" >12%</option>
+    <option value="18" >18%</option>
+    </select>
+    </div>
+    <div className="form-group" >
+    <span className="error">{data.error}</span>
+    <button type="submit" className="btn" >Generator</button>
+    </div>
+    </form>
+    {data.showLoader ? <Preloader/> : null }
+    </section>
+   );
+  }
+ }
+ <br/>
+ 
+ class Invoice extends Component{
+  printScreen(){
+   window.print();
+   alert("print btn working is web browser")
+  }
+  render(){
+   const { data } = this.props;
+   const invoiceNo = Math.floor(Math.random() * 100);
    
-
-    <div class="form-group">
-      <p>Any comments or suggestions?</p>
-      <textarea id="comments" class="input-textarea" name="comment" placeholder="Enter your comment here..."></textarea>
+   let date = new Date();
+   let day = date.getDate();
+   let month = date.getMonth() +1;
+   let yr = date.getFullYear();
+   let today = day+'/'+month+'/'+yr;
+   
+   
+   const rate = +data.productRate;
+   const quality = +data.quality;
+   const total = rate * quality;
+   const gstRate = +data.gstRate;
+   
+   let sGst = null;
+   let cGst = null;
+   let iGst = null;
+   let hSgst = null;
+   let hCgst = null;
+   let hIgst = null;
+   let grendTotal = total;
+   
+  if(data.gstRate.length){
+   if(data.state === 'local'){
+    let haf = gstRate / 2;
+     hSgst = haf+'%';
+     hCgst = haf+'%';
+    sGst = total * haf /100;
+    cGst = total * haf /100;
+   }else if(data.state === 'inter'){
+    hIgst = gstRate+'%';
+    iGst = total * gstRate / 100;
+   }
+   grendTotal = total + sGst + cGst + iGst;
+  }
+   return(
+    <section className="container ">
+    <div className="title center">
+    <h1>Shri Ram Watch Mobile & Gift Center</h1>
+    <p>Nsb Road Ukhra, Andal </p>
+    <p>Contact : +917001655429</p>
     </div>
-    <div class="form-group">
-      <button type="submit" action="https://prince3pro.github.io/" id="submit" class="submit-button">
-        Submit
-      </button>
+    <span className="info" >Desktop screen Ui</span>
+    <div className="row">
+    <div className="w100 center p8">
+    <h3>SALE INVOICE</h3>
     </div>
-</form>
- <marquee behaviour="scroll" direction="left"> <code>Copyright© --Prince-- <u>2022</u></code>
-</marquee>
-<style>
-    /* Created by <DD> */
+    <div className="w50 p5" >
+    <h3>Shri Ram Watch Mobile & Gift Center</h3>
+    <p>Sales & Service</p>
+    <p>Nsb Road Ukhra, Andal</p>
+    <p>West Bengal, India</p>
+    </div>
+    <div className="w50">
+    <div className="row nb">
+    <div className="w50 bl p5" >
+    <p> Invoice No: {invoiceNo}</p>
+    </div>
+    <div className="w50 p5" >
+    <p>Date: 1st August 2024</p>
+    </div>
+    <div className="w50 bl p5" >
+    <p>Delivery Note </p>
+    </div>
+    <div className="w50 p5" >
+    <p>Payment type : <span>{data.payType}</span></p>
+    </div>
+    <div className="w50 bl p5 bbn" >
+    <p> Supplier's Ref. </p>
+    </div>
+    <div className="w50 p5 bbn" >
+    <p>Other Reference.</p>
+    </div>
+    </div>
+    </div>
+    <div className="w50 p5" >
+    <p><b>Buyer</b></p>
+    <h3>{data.buyer}</h3>
+    <p>{data.address}</p>
+    <p>India</p>
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:200i,400&display=swap');
+    <p>Place Of Supply : {data.state} State</p>
+    </div>
+    <div className="w50">
+    <div className="row nb">
+    <div className="w50 bl p5" >
+    <p>Buyer's Order No </p>
+    </div>
+    <div className="w50 p5" >
+    <p>Order Date</p>
+    </div>
+    <div className="w50 bl p5" >
+    <p>Despatch Documents No</p>
+    </div>
+    <div className="w50 p5" >
+    <p>Delivery Note Date</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div className="row">
+    <div className="w30 p5" >
+    Description
+    </div>
+    <div className="w8 p5">
+    HSN/SAC
+    </div>
+    <div className="w8 p5" >
+    Quality
+    </div>
+    <div className="w6 p5" >
+    Unit
+    </div>
+    <div className="w8 p5" >
+    Rate
+    </div>
+    <div className="w8 p5">
+    value
+    </div>
+    
+    </div>
+    <div className="row h100">
+    <div className="w30 p5" >
+     {data.product}
+    </div>
+    <div className="w8 p5">
+     {data.hsn}
+    </div>
+    <div className="w8 p5" >
+     {data.quality}
+    </div>
+    <div className="w6 p5" >
+     pc
+    </div>
+    <div className="w8 p5" >
+     {data.productRate}
+    </div>
+    <div className="w8 p5">
+     {total}
+    </div>
+    <div className="w8 p5">
+     {data.gstRate !== '' ? data.gstRate +'%' : ''} 
+    </div>
+    <div className="w8 p5">
+     {sGst}
+    </div>
+    <div className="w8 p5">
+     {cGst}
+    </div>
+    <div className="w8 p5">
+     {iGst}
+    </div>
+    </div>
+    <div className="row ">
+    <div className="w30 p5" >
+    
+    </div>
+    <div className="w8 p5">
+    
+    </div>
+    <div className="w8 p5" >
+    </div>
+    <div className="w6 p5" >
+    </div>
+    <div className="w8 p5" >
+    </div>
+    <div className="w8 p5">
+    {total}
+    </div>
+    <div className="w8 p5">
+    </div>
+    <div className="w8 p5">
+     {sGst}
+    </div>
+    <div className="w8 p5">
+     {cGst}
+    </div>
+    <div className="w8 p5">
+     {iGst}
+    </div>
+    </div>
+    <div className="row" >
+    <div className="w50 p5">
+    <h3>Description</h3>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+    </p>
+    <h3 className="m5" >Teams of services</h3>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+    </p>
+    </div>
+    <div className="w50">
+    <div className="row nb" >
+    <div className="w50 p5 bl" >
+    <p><b> total amount of before tex</b></p>
+    </div>
+    <div className="w20 p5 bl">
+    <p></p>
+    </div>
+    <div className="w30 p5" >
+    <p>{total}</p>
+    </div>
+    </div>
+    <div className="row nb" >
+    <div className="w50 p5 bl" >
+    <p> <b>ADD : STATE TEX</b></p>
+    </div>
+    <div className="w20 p5 bl">
+    <p>{hSgst}</p>
+    </div>
+    <div className="w30 p5" >
+    <p>{sGst}</p>
+    </div>
+    </div>
+    <div className="row nb" >
 
-:root {
-  --color-white: #f3f3f3;
-  --color-darkblue: #1b1b32;
-  --color-darkblue-alpha: rgba(27, 27, 50, 0.8);
-  --color-green: #37af65;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.4;
-  color: var(--color-white);
-  margin: 0;
-}
-
-/* mobile friendly alternative to using background-attachment: fixed */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  background: #8990E6;
-  background-image: linear-gradient(
-      115deg,
-      rgba(58, 58, 158, 0.8),
-      rgba(136, 136, 206, 0.7)
-    ),
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-h1 {
-  font-weight: 400;
-  line-height: 1.2;
-  color: Red;
-  blur: 50px;
-}
-
-p {
-  font-size: 1.125rem;
-}
-
-h1,
-p {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
-
-label {
-  display: flex;
-  align-items: center;
-  font-size: 1.125rem;
-  margin-bottom: 0.5rem;
-}
-
-input,
-button,
-select,
-textarea {
-  margin: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-button {
-  border: none;
-}
-
-.container {
-  width: 100%;
-  margin: 3.125rem auto 0 auto;
-}
-
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
+    </div>
+    <div className="row nb">
+    <div className="w50 p5 bl bbn" >
+    <p><b>Total</b></p>
+    </div>
+    <div className="w20 p5 bbn" >
+    <p></p>
+    </div>
+    <div className="w30 p5 bbn" >
+    <p><b>{grendTotal}</b></p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div className="row f14" >
+    <div className="w50 p8" >
+    <p>Our Mobile No: +917001655429</p>
+    </div>
+    <div className="w50 p8 right" >
+    <p>Authorise Signature</p>
+    <p className="sin" >Rajesh modi</p>
+    </div>
+    </div>
+    <button className="btn my" onClick={this.props.handleEdit}>Edit</button>
+    <button className="btn my" onClick={this.props.backToHome} >Home</button>
+    <button className="print" onClick={() => this.printScreen()}>Print</button> 
+    </section>
+   );
   }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
+ }
+ <br/>
+ class App extends Component{
+  constructor(){
+   super();
+   const initialState = {
+    buyer:'',
+    address:'',
+    state:'',
+    product:'',
+    hsn:'',
+    productRate:'',
+    quality:'',
+    payType:'',
+    texType:'',
+    gstno:'',
+    gstRate:'',
+    error:'',
+    showBill:false,
+    notEdited:true,
+    showLoader:false
+   }
+   this.state = initialState;
+   
+   this.handleSubmit = this.handleSubmit.bind(this);
+   this.handleChange = this.handleChange.bind(this);
+   this.backToHome = this.backToHome.bind(this);
+   this.handleEdit = this.handleEdit.bind(this);
   }
-}
+  handleSubmit(e){
+   e.preventDefault();
+   const { buyer, address, state , product, hsn, productRate, quality, payType, texType, gstno , gstRate, error } = this.state;
+   let errors = '';
 
-.header {
-  padding: 0 0.625rem;
-  margin-bottom: 1.875rem;
-}
-
-.description {
-  font-style: italic;
-  font-weight: 200;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
-}
-
-.clue {
-  margin-left: 0.25rem;
-  font-size: 0.9rem;
-  color: #e4e4e4;
-}
-
-.text-center {
-  text-align: center;
-}
-
-/* form */
-
-form {
-  background: #041534;
-  padding: 2.5rem 0.625rem;
-  border-radius: 0.25rem;
-}
-
-@media (min-width: 480px) {
-  form {
-    padding: 2.5rem;
+    this.setState({
+    error:''
+    }) 
+    
+   if(buyer === ''){
+    errors = "buyer name is required";
+   }else if(state === ''){
+   errors = "select state";
+   }else if(product === ''){
+    errors ="product name is required";
+   }else if(productRate === ''){
+    errors ="product Rate is required";
+   }else if(quality === ''){
+    errors ="product quality is required";
+   }else if(texType !== ''){
+    if(gstno === ''){
+    errors ="enter GST Number";
+    }else if(gstno.length < 15){
+     errors ="invalid GST number";
+    }else if(gstRate === ''){
+     errors ="select GST rate";
+    }
+   }else if(gstRate !== ''){
+    if(texType === ''){
+    errors ="select text type";
+    }
+   }
+   if(errors.length){
+    this.setState({
+    error:errors
+    });
+    return;
+   }
+   
+   this.setState({
+    showLoader:true
+   })
+   setTimeout(function(){
+    this.setState({
+    showBill:true,
+    notEdited:true,
+    showLoader:false
+    })
+   }.bind(this),2000)
+  } 
+  handleChange(e){
+   const { name , value } = e.target;
+   this.setState({
+   [name]:value
+   });
   }
-}
-
-.form-group {
-  margin: 0 auto 1.25rem auto;
-  padding: 0.25rem;
-}
-
-.form-control {
-  display: block;
-  width: 100%;
-  height: 2.375rem;
-  padding: 0.375rem 0.75rem;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.form-control:focus {
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.input-radio,
-.input-checkbox {
-  display: inline-block;
-  margin-right: 0.625rem;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-}
-
-.input-textarea {
-  min-height: 120px;
-  width: 100%;
-  padding: 0.625rem;
-  resize: vertical;
-}
-
-.submit-button {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  background: var(--color-green);
-  color: inherit;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-</style>
+  backToHome(){
+   this.setState({
+    buyer:'',
+    address:'',
+    state:'',
+    product:'',
+    hsn:'',
+    productRate:'',
+    quality:'',
+    payType:'',
+    texType:'',
+    gstno:'',
+    gstRate:'',
+    error:'',
+    showBill:false,
+    notEdited:true,
+    showLoader:false
+   });
+  }
+  handleEdit(){
+   this.setState({
+    notEdited:false
+   })
+  }
+ 
+  render(){
+   return(
+    <div className="app">
+     {this.state.showBill && this.state.notEdited ? 
+     (
+      <Invoice
+       backToHome={this.backToHome}
+       handleEdit={this.handleEdit}
+       data={this.state}
+      />
+     ):(
+      <InputForm
+       handleChange={this.handleChange}
+       handleSubmit={this.handleSubmit}
+       data={this.state}
+      />
+     )}  
+    </div>
+   );
+  }
+ }
+ ReactDOM.render(<App/>,root);
+</script>
 </body>
 </html>
